@@ -155,5 +155,61 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    background-image:
+      radial-gradient(circle at 15% 10%, oklch(0.35 0.12 265 / 0.35), transparent 45%),
+      radial-gradient(circle at 85% 90%, oklch(0.35 0.18 305 / 0.28), transparent 50%),
+      radial-gradient(circle at 50% 50%, oklch(0.2 0.05 200 / 0.18), transparent 60%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    font-feature-settings: "ss01", "cv11";
   }
 }
+
+@layer utilities {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid var(--glass-border);
+  }
+  .glow-blue { box-shadow: 0 0 24px -4px oklch(0.72 0.18 250 / 0.55), inset 0 0 0 1px oklch(0.72 0.18 250 / 0.25); }
+  .glow-purple { box-shadow: 0 0 24px -4px oklch(0.68 0.22 305 / 0.55), inset 0 0 0 1px oklch(0.68 0.22 305 / 0.25); }
+  .glow-cyan { box-shadow: 0 0 24px -4px oklch(0.82 0.16 200 / 0.55), inset 0 0 0 1px oklch(0.82 0.16 200 / 0.25); }
+  .glow-red { box-shadow: 0 0 24px -4px oklch(0.68 0.24 25 / 0.6), inset 0 0 0 1px oklch(0.68 0.24 25 / 0.3); }
+  .glow-green { box-shadow: 0 0 24px -4px oklch(0.78 0.2 150 / 0.55), inset 0 0 0 1px oklch(0.78 0.2 150 / 0.25); }
+  .text-gradient {
+    background: linear-gradient(135deg, oklch(0.82 0.16 200), oklch(0.72 0.18 250), oklch(0.68 0.22 305));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(oklch(0.72 0.18 250 / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(0.72 0.18 250 / 0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background: oklch(0.5 0.1 265 / 0.4); border-radius: 4px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(1.15); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.animate-pulse-glow { animation: pulse-glow 1.8s ease-in-out infinite; }
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, oklch(0.72 0.18 250 / 0.18), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2.4s linear infinite;
+}
+.animate-float-slow { animation: float-slow 4s ease-in-out infinite; }
